@@ -10,7 +10,9 @@ mex c_icm_trans.c
 
 mex c_tissue_fractions.c
 
-works most of the time. 
+works most of the time. Mex files for 64-bit Windows are provided. In case mex-compilation won't work, 
+check the pure Matlab implementation in pure_matlab subdir. However, this is not recommended as it is very slow 
+compared to optimized c-code in mex-files.
 
 Usage : The function pvemrimex2.m is the main function including all the pure Matlab components of the algorithm. pvemrimex2 is 
 extremely fast and should run in under 10 seconds for a normal MRI volume (e.g. 181 x 217 x 181). 
