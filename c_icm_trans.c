@@ -39,6 +39,8 @@
   % Iterative conditional modes based MRF
   % *******************************************
 
+ *Version 1.1: A bug corrected; thanks to Negar Noorizadeh for pointing that out
+ *
 function seg = icm_trans(img,brain_mask,beta,voxel_size,class_means,class_vars)
 */
 #define getIndex(x,y,z,dims) ((x) + (y)*(dims[0]) + (z)*(dims[0])*(dims[1])) 
@@ -159,7 +161,7 @@ for(z1 = -1;z1 < 2;z1++) {
     for(t = 0; t < (INTERVALS + 1);t++) {
       w = ((double) t)/INTERVALS;  
       tmpmu[t] = w*mu1 + (1 - w)*mu2;
-      tmpvar[t] = w*w*var1 + (1 - w*w)*var2;
+      tmpvar[t] = w*w*var1 + (1 - w)*(1 - w)*var2; /* corrected 9/9/2015 */
       tmpnc[t] = (1/sqrt(2*M_PI*tmpvar[t]))*(1/ ((double) INTERVALS)); 
       negtwotmpvar[t] = 1/((-2)*tmpvar[t]);
     }
