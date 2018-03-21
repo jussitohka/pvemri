@@ -16,7 +16,8 @@
 % J. Tohka, A. Zijdenbos, and A. Evans. 
 % Fast and robust parameter estimation for statistical partial volume models in brain MRI. 
 % NeuroImage, 23(1):84 - 97, 2004. 
-% Please cite this paper if you use the code */
+% Please cite this paper if you use the code 
+ % Version 1.1: A bug corrected; thanks to Negar Noorizadeh for pointing that out */
 
 void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 {
@@ -86,7 +87,7 @@ numel = dims[0]*dims[1]*dims[2];
     for(t = 0;t < 101;t++) {
       w = ((double) t)/100;	    
       tmpmu[t] = w*mu1 + (1 - w)*mu2;
-      tmpvar[t] = w*w*var1 + (1 - w*w)*var2;
+      tmpvar[t] = w*w*var1 + (1 - w)*(1 - w)*var2; /* corrected 9/9/2015 */
       regterm[t] = log(tmpvar[t]);
       tmponepervar[t] = 1/(tmpvar[t]);
     }  
